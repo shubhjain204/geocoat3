@@ -1,0 +1,98 @@
+{
+  "theme": "LIGHT",
+  "archetype": "1 (Organic & Earthy)",
+  "design_philosophy": "A visually stunning 3D landing page for GeoCoat, a premium Mineral Silicate Paint. Grounded in materiality—stone, mineral, pigment, lime, silica. The design blends scientific clarity with earthy, architectural aesthetics. Generous spacing, large expressive typography, and immersive scroll-driven 3D parallax effects create an editorial, high-end feel.",
+  "colors": {
+    "background": "#F5F5F0",
+    "surface": "#FFFFFF",
+    "surface_alt": "#EAE6DA",
+    "primary": "#3A4538",
+    "secondary": "#C05A45",
+    "accent": "#DDA74F",
+    "text_primary": "#1A1A1A",
+    "text_secondary": "#5B7059",
+    "border": "#D1CEC5"
+  },
+  "typography": {
+    "heading_font": "Outfit",
+    "body_font": "Manrope",
+    "h1": "text-5xl sm:text-6xl+ tracking-tighter leading-none font-light",
+    "h2": "text-4xl sm:text-5xl tracking-tight leading-none font-light",
+    "h3": "text-2xl sm:text-3xl tracking-tight leading-tight",
+    "h4": "text-xl sm:text-2xl",
+    "body": "text-base leading-relaxed",
+    "overline": "text-sm uppercase tracking-[0.2em] font-semibold text-secondary"
+  },
+  "spacing_and_layout": {
+    "spacing_scale": "p-8, p-12, p-16, p-24, p-32",
+    "container_padding": "px-6 md:px-12 lg:px-24",
+    "grid_strategy": "MODE A: THE 'TETRIS' GRID. Asymmetrical bento layouts for features and gallery. Wide gaps (gap-8 to gap-12). Never fill 100% of the grid perfectly."
+  },
+  "motion_and_interaction": {
+    "scroll": "MANDATORY use of lenis for smooth momentum scrolling.",
+    "parallax": "Use framer-motion useScroll and useTransform for 2.5D layer movements on hero and gallery sections.",
+    "hover_states": "Hovering on interactive elements must have smooth translation and color transition. Cards lift slightly (-translate-y-1) with subtle shadow.",
+    "3d_element": "react-three-fiber for hero section (e.g., rotating mineral crystal or 3D architectural block), mapped with earthy textures and natural lighting.",
+    "marquee": "Use an editorial marquee (react-fast-marquee) for the 'Why Mineral Silicate Paint' keywords or partner logos. Very slow smooth drift, wide tracking."
+  },
+  "components": {
+    "navigation": "Sticky glassmorphism header (backdrop-blur-xl bg-white/70) with 1px delicate inner stroke (border-white/40). Must not overlap page content.",
+    "hero": "Split screen or absolute overlay. The 3D element dominates the center/right. Left side holds the massive H1 and CTA. Max overlay opacity bg-black/30 if over an image.",
+    "about": "Editorial layout. Large quote text, offset images.",
+    "features_bento": "Asymmetrical grid showcasing breathable, eco-friendly, durable features. Soft shadows, 1px borders.",
+    "color_palette": "Interactive color swatches. Clicking a swatch smoothly changes a central sample area.",
+    "process": "Step-by-step visual sequence using vertical sticky scrolling or timeline layout.",
+    "testimonials": "Large typographic quotes, generous negative space.",
+    "contact": "Clean Shadcn forms heavily customized to remove the 'Vercel-look'. Flat solid inputs, high contrast borders."
+  },
+  "assets": {
+    "libraries": [
+      "lenis",
+      "framer-motion",
+      "lucide-react",
+      "three",
+      "@react-three/fiber",
+      "@react-three/drei",
+      "react-fast-marquee"
+    ],
+    "image_urls": [
+      {
+        "url": "https://images.unsplash.com/photo-1628012209120-d9db7abf7eab?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBhcmNoaXRlY3R1cmUlMjBleHRlcmlvcnxlbnwwfHx8fDE3ODIxMTE4MDh8MA&ixlib=rb-4.1.0&q=85",
+        "category": "hero_background",
+        "description": "Modern architecture exterior for hero section or process background."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1708894462826-ba3fa93b41b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwxfHxtaW5lcmFsJTIwcGFpbnQlMjB0ZXh0dXJlfGVufDB8fHx8MTc4MjExMTgwOHww&ixlib=rb-4.1.0&q=85",
+        "category": "texture_overlay",
+        "description": "Mineral paint texture. Use for card backgrounds or 3D material mapping."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1761476267514-ffec14e7af84?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwzfHxzdG9uZSUyMGZhY2FkZSUyMGJ1aWxkaW5nfGVufDB8fHx8MTc4MjExMTgwOHww&ixlib=rb-4.1.0&q=85",
+        "category": "about_image",
+        "description": "Stone building facade for the About section to emphasize materiality."
+      },
+      {
+        "url": "https://images.pexels.com/photos/15291734/pexels-photo-15291734.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "category": "gallery_image_1",
+        "description": "Colorful stone surface representing mineral color palettes."
+      },
+      {
+        "url": "https://images.pexels.com/photos/37582309/pexels-photo-37582309.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "category": "gallery_image_2",
+        "description": "Modern lattice facade for applications section."
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Install required dependencies: yarn add lenis framer-motion three @react-three/fiber @react-three/drei react-fast-marquee @phosphor-icons/react",
+    "You are building a high-end 3D marketing page. Do NOT use standard Shadcn cards for layouts. Use raw HTML/Tailwind for the bento grids and hero section to achieve the required asymmetry and spacing.",
+    "Wrap the entire application or the main scroll container in a Lenis smooth scroll provider.",
+    "Create a 3D Canvas in the hero section using @react-three/fiber and three.js. Render a set of primitive geometries (like Icosahedron or Box) representing mineral crystals or architectural blocks. Apply a MeshStandardMaterial with roughness=0.8, metalness=0.1, and an earthy color like #EAE6DA or #C05A45. Use Drei's <Float> and <Environment preset='apartment'> to make it feel premium.",
+    "Use Framer Motion for scroll-triggered animations (fade-in up, scale) on text elements and sections.",
+    "For the 'Why Mineral Silicate Paint' section, use the 'Bento Grid' strategy. Ensure wide gaps (gap-8) and uneven column spans.",
+    "Include data-testid attributes on all interactive elements (buttons, forms, 3D canvas triggers).",
+    "For the Contact Form, use Shadcn form components but strip away the default Vercel look. Use solid flat backgrounds with sharp borders.",
+    "Ensure the hero overlay opacity never exceeds bg-black/50 or bg-white/40.",
+    "Use Google Fonts: @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Manrope:wght@400;500;600&display=swap'); in the CSS. Configure Tailwind config with font-sans: 'Manrope', font-heading: 'Outfit'."
+  ]
+}
