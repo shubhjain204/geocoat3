@@ -48,9 +48,9 @@ export const HomeHero = () => {
                         transition={{ duration: 1.2, delay: 0.2, ease: [0.86, 0, 0.07, 1] }}
                         className="font-heading font-extralight tracking-tighter leading-[0.92] text-[#1A1A1A] text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] text-balance"
                     >
-                        Mineral chemistry<span className="text-[#C05A45]">.</span>
+                        The <span className="italic font-light text-[#3A4538]">mineral</span> standard
                         <br />
-                        <span className="italic font-light text-[#3A4538]">Made</span> permanent.
+                        for every surface<span className="text-[#C05A45]">.</span>
                     </motion.h1>
 
                     <motion.p
