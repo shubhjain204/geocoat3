@@ -2,7 +2,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Environment, Sparkles, Octahedron, Torus, MeshDistortMaterial } from "@react-three/drei";
 import { useRef, Suspense } from "react";
 
-/* Central mineral monolith — a slowly rotating dark green diamond. */
+/* Central mineral monolith — a slowly rotating earthy diamond. */
 function Monolith() {
     const ref = useRef();
     useFrame((_, delta) => {
@@ -13,7 +13,7 @@ function Monolith() {
     });
     return (
         <Float speed={0.6} rotationIntensity={0.15} floatIntensity={0.7}>
-            <Octahedron ref={ref} args={[1.3, 0]} position={[2.8, 0, 0]}>
+            <Octahedron ref={ref} args={[1.0, 0]} position={[2.8, 0, 0]}>
                 <MeshDistortMaterial
                     color="#6B5440"
                     roughness={0.92}
@@ -84,20 +84,20 @@ export const HomeScene3D = () => {
                 <directionalLight position={[-4, -3, -3]} intensity={0.5} color="#C05A45" />
                 <pointLight position={[3, 0, 3]} intensity={0.6} color="#DDA74F" />
 
-                {/* Central green diamond */}
+                {/* Central earthy diamond */}
                 <Monolith />
 
                 {/* Three gyroscopic rings on different axes */}
-                <OrbitRing radius={1.9} tube={0.032} color="#DDA74F" axis="x" speed={0.25} />
-                <OrbitRing radius={2.25} tube={0.02} color="#C05A45" axis="z" speed={0.18} />
-                <OrbitRing radius={2.6} tube={0.015} color="#5B7059" axis="y" speed={0.22} />
+                <OrbitRing radius={1.6} tube={0.028} color="#DDA74F" axis="x" speed={0.25} />
+                <OrbitRing radius={1.95} tube={0.018} color="#C05A45" axis="z" speed={0.18} />
+                <OrbitRing radius={2.3} tube={0.014} color="#5B7059" axis="y" speed={0.22} />
 
                 {/* Mineral flecks orbiting */}
-                <MineralFleck position={[4.6, 1.2, -0.5]} color="#C05A45" scale={0.14} />
-                <MineralFleck position={[0.6, -1.6, -1]} color="#DDA74F" scale={0.17} />
-                <MineralFleck position={[5.1, -0.4, 0.5]} color="#EAE6DA" scale={0.12} />
+                <MineralFleck position={[4.3, 1.1, -0.5]} color="#C05A45" scale={0.12} />
+                <MineralFleck position={[0.8, -1.4, -1]} color="#DDA74F" scale={0.14} />
+                <MineralFleck position={[4.8, -0.3, 0.5]} color="#EAE6DA" scale={0.1} />
 
-                <Sparkles count={60} scale={[10, 6, 5]} size={2} speed={0.25} color="#DDA74F" opacity={0.7} />
+                <Sparkles count={50} scale={[10, 6, 5]} size={1.7} speed={0.22} color="#DDA74F" opacity={0.6} />
 
                 <Environment preset="apartment" />
                 <fog attach="fog" args={["#F5F5F0", 9, 20]} />
