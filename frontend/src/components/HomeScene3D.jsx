@@ -4,7 +4,7 @@ import { useRef, useLayoutEffect, useMemo, Suspense } from "react";
 import * as THREE from "three";
 
 /* ---------- Atomic bond cylinder ---------- */
-function Bond({ from, to, color = "#8C7355", thickness = 0.05 }) {
+function Bond({ from, to, color = "#C9B89A", thickness = 0.04 }) {
     const ref = useRef();
     useLayoutEffect(() => {
         if (!ref.current) return;
@@ -23,16 +23,22 @@ function Bond({ from, to, color = "#8C7355", thickness = 0.05 }) {
     return (
         <mesh ref={ref}>
             <cylinderGeometry args={[thickness, thickness, 1, 16]} />
-            <meshStandardMaterial color={color} roughness={0.55} metalness={0.35} />
+            <meshStandardMaterial color={color} roughness={0.85} metalness={0.1} transparent opacity={0.5} />
         </mesh>
     );
 }
 
 /* ---------- Atom (sphere) ---------- */
-function Atom({ position, color, radius = 0.45, roughness = 0.7, metalness = 0.1 }) {
+function Atom({ position, color, radius = 0.45, roughness = 0.85, metalness = 0.05, opacity = 0.55 }) {
     return (
         <Sphere args={[radius, 48, 48]} position={position}>
-            <meshStandardMaterial color={color} roughness={roughness} metalness={metalness} />
+            <meshStandardMaterial
+                color={color}
+                roughness={roughness}
+                metalness={metalness}
+                transparent
+                opacity={opacity}
+            />
         </Sphere>
     );
 }
@@ -67,32 +73,32 @@ function SilicateLattice() {
     return (
         <group ref={groupRef} position={[0.5, 0, 0]}>
             {/* Central silicon */}
-            <Atom position={[0, 0, 0]} color="#5C5751" radius={0.55} roughness={0.4} metalness={0.4} />
+            <Atom position={[0, 0, 0]} color="#A89F8F" radius={0.55} />
 
             {/* Tetrahedral oxygens */}
             {vertices.map((v, i) => (
-                <Atom key={`o-${i}`} position={v} color="#D9CDB5" radius={0.38} />
+                <Atom key={`o-${i}`} position={v} color="#E8E0CC" radius={0.38} />
             ))}
 
             {/* Bonds: center to each oxygen */}
             {vertices.map((v, i) => (
-                <Bond key={`b-${i}`} from={[0, 0, 0]} to={v} color="#C89F5D" />
+                <Bond key={`b-${i}`} from={[0, 0, 0]} to={v} />
             ))}
 
             {/* Secondary silicon */}
-            <Atom position={offsetCenter} color="#5C5751" radius={0.5} roughness={0.4} metalness={0.4} />
+            <Atom position={offsetCenter} color="#A89F8F" radius={0.5} />
 
             {/* Shared bridging oxygen between the two silicons */}
-            <Atom position={[offset / 2, 0, 0]} color="#C05A45" radius={0.32} />
-            <Bond from={[0, 0, 0]} to={[offset / 2, 0, 0]} color="#C89F5D" />
-            <Bond from={[offset / 2, 0, 0]} to={offsetCenter} color="#C89F5D" />
+            <Atom position={[offset / 2, 0, 0]} color="#CFA17A" radius={0.32} opacity={0.6} />
+            <Bond from={[0, 0, 0]} to={[offset / 2, 0, 0]} />
+            <Bond from={[offset / 2, 0, 0]} to={offsetCenter} />
 
             {/* Three remaining oxygens on secondary silicon */}
             {offsetVertices.slice(1).map((v, i) => (
-                <Atom key={`o2-${i}`} position={v} color="#D9CDB5" radius={0.32} />
+                <Atom key={`o2-${i}`} position={v} color="#E8E0CC" radius={0.32} />
             ))}
             {offsetVertices.slice(1).map((v, i) => (
-                <Bond key={`b2-${i}`} from={offsetCenter} to={v} color="#C89F5D" thickness={0.04} />
+                <Bond key={`b2-${i}`} from={offsetCenter} to={v} thickness={0.03} />
             ))}
         </group>
     );
@@ -111,7 +117,7 @@ function FreeAtom({ position, color, scale = 0.25 }) {
     return (
         <Float speed={1.3} rotationIntensity={0.4} floatIntensity={0.8}>
             <Sphere ref={ref} args={[1, 32, 32]} position={position} scale={scale}>
-                <meshStandardMaterial color={color} roughness={0.7} metalness={0.1} />
+                <meshStandardMaterial color={color} roughness={0.85} metalness={0.05} transparent opacity={0.55} />
             </Sphere>
         </Float>
     );
@@ -127,20 +133,20 @@ export const HomeScene3D = () => {
             style={{ background: "transparent" }}
         >
             <Suspense fallback={null}>
-                <ambientLight intensity={0.55} />
-                <directionalLight position={[5, 6, 5]} intensity={1.2} color="#FFE9C8" />
-                <directionalLight position={[-5, -2, -3]} intensity={0.45} color="#C05A45" />
-                <pointLight position={[2, 1, 3]} intensity={0.45} color="#DDA74F" />
+                <ambientLight intensity={0.7} />
+                <directionalLight position={[5, 6, 5]} intensity={0.85} color="#FFE9C8" />
+                <directionalLight position={[-5, -2, -3]} intensity={0.25} color="#C9A28A" />
+                <pointLight position={[2, 1, 3]} intensity={0.25} color="#E8C99A" />
 
                 <SilicateLattice />
 
                 {/* Free atoms drifting toward the lattice */}
-                <FreeAtom position={[-3.4, 1.4, 0]} color="#D9CDB5" scale={0.3} />
-                <FreeAtom position={[-3.0, -1.8, 0.5]} color="#C05A45" scale={0.22} />
-                <FreeAtom position={[4.6, 1.8, -0.5]} color="#D9CDB5" scale={0.28} />
-                <FreeAtom position={[5.0, -1.5, 0]} color="#C89F5D" scale={0.24} />
+                <FreeAtom position={[-3.4, 1.4, 0]} color="#E8E0CC" scale={0.3} />
+                <FreeAtom position={[-3.0, -1.8, 0.5]} color="#CFA17A" scale={0.22} />
+                <FreeAtom position={[4.6, 1.8, -0.5]} color="#E8E0CC" scale={0.28} />
+                <FreeAtom position={[5.0, -1.5, 0]} color="#CFA17A" scale={0.24} />
 
-                <Sparkles count={60} scale={[12, 7, 5]} size={2} speed={0.25} color="#DDA74F" opacity={0.65} />
+                <Sparkles count={50} scale={[12, 7, 5]} size={1.5} speed={0.2} color="#CFA17A" opacity={0.35} />
 
                 <Environment preset="apartment" />
                 <fog attach="fog" args={["#F5F5F0", 9, 22]} />

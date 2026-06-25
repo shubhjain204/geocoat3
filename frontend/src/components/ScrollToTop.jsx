@@ -1,11 +1,29 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-/** Scrolls the window to the top whenever the route pathname changes. */
+/**
+ * Resets scroll to top on every route change.
+ * Runs synchronously (useLayoutEffect) and again on the next animation frame
+ * so it overrides smooth-scroll libraries (e.g. Lenis) that may have synced
+ * to a non-zero offset during the route transition.
+ */
 export const ScrollToTop = () => {
     const { pathname } = useLocation();
-    useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: "instant" in window ? "instant" : "auto" });
+    useLayoutEffect(() => {
+        const reset = () => {
+            window.scrollTo(0, 0);
+            if (document.documentElement) document.documentElement.scrollTop = 0;
+            if (document.body) document.body.scrollTop = 0;
+        };
+        reset();
+        const r1 = requestAnimationFrame(reset);
+        const r2 = requestAnimationFrame(() => requestAnimationFrame(reset));
+        const t = setTimeout(reset, 50);
+        return () => {
+            cancelAnimationFrame(r1);
+            cancelAnimationFrame(r2);
+            clearTimeout(t);
+        };
     }, [pathname]);
     return null;
 };
