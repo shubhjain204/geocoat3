@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Environment, Sparkles } from "@react-three/drei";
+import { Float, Environment, Sparkles, Cylinder, Sphere } from "@react-three/drei";
 import {
     Shield,
     Layers,
@@ -20,18 +20,38 @@ import { Navigation } from "@/components/Navigation";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
-/* ---------- 3D scene: stacked steel-protection layers ---------- */
-function LayerBlock({ position, color, rotationSpeed = 0.2 }) {
+/* ---------- 3D scene: exploded three-layer coating system ----------
+   Cylindrical discs slightly tilted + a steel sphere emerging from beneath. */
+function LayerDisc({ position, color, rotationSpeed = 0.2, scale = 1 }) {
     const ref = useRef();
-    useFrame((state, delta) => {
+    useFrame((_, delta) => {
         if (ref.current) ref.current.rotation.y += delta * rotationSpeed;
     });
     return (
-        <Float speed={0.8} rotationIntensity={0.2} floatIntensity={0.6}>
-            <mesh ref={ref} position={position}>
-                <boxGeometry args={[2.6, 0.35, 2.6]} />
+        <Float speed={0.6} rotationIntensity={0.18} floatIntensity={0.6}>
+            <Cylinder
+                ref={ref}
+                args={[1.7, 1.7, 0.18, 64]}
+                position={position}
+                rotation={[Math.PI / 14, 0, Math.PI / 22]}
+                scale={scale}
+            >
                 <meshStandardMaterial color={color} roughness={0.85} metalness={0.25} flatShading />
-            </mesh>
+            </Cylinder>
+        </Float>
+    );
+}
+
+function SteelCore({ position }) {
+    const ref = useRef();
+    useFrame((_, delta) => {
+        if (ref.current) ref.current.rotation.y += delta * 0.18;
+    });
+    return (
+        <Float speed={0.4} rotationIntensity={0.1} floatIntensity={0.35}>
+            <Sphere ref={ref} args={[1.05, 64, 64]} position={position}>
+                <meshStandardMaterial color="#26241F" roughness={0.35} metalness={0.95} />
+            </Sphere>
         </Float>
     );
 }
@@ -40,30 +60,25 @@ function PrimerScene() {
     return (
         <Canvas
             data-testid="primer-3d-canvas"
-            camera={{ position: [4, 2.5, 5.5], fov: 45 }}
+            camera={{ position: [3.4, 2.1, 6], fov: 42 }}
             dpr={[1, 2]}
             gl={{ antialias: true, alpha: true }}
         >
             <Suspense fallback={null}>
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[5, 6, 4]} intensity={1.3} color="#FFE9C8" />
+                <ambientLight intensity={0.55} />
+                <directionalLight position={[5, 6, 4]} intensity={1.35} color="#FFE9C8" />
                 <directionalLight position={[-4, -2, -3]} intensity={0.4} color="#3A4538" />
-                <pointLight position={[0, 2, 3]} intensity={0.5} color="#DDA74F" />
+                <pointLight position={[1, 3, 3]} intensity={0.55} color="#DDA74F" />
 
-                {/* Three-layer stack — positioned right of headline */}
-                <LayerBlock position={[3, 1.0, 0]} color="#3A4538" rotationSpeed={0.15} />
-                <LayerBlock position={[3, 0.3, 0]} color="#C89F5D" rotationSpeed={0.18} />
-                <LayerBlock position={[3, -0.4, 0]} color="#5C5751" rotationSpeed={0.22} />
+                {/* Three exploded layer discs above */}
+                <LayerDisc position={[3.4, 2.2, 0]} color="#3A4538" rotationSpeed={0.15} scale={1.05} />
+                <LayerDisc position={[3.4, 1.55, 0]} color="#C89F5D" rotationSpeed={0.2} scale={0.98} />
+                <LayerDisc position={[3.4, 0.9, 0]} color="#5C5751" rotationSpeed={0.25} scale={0.94} />
 
-                {/* Steel substrate */}
-                <Float speed={0.5} rotationIntensity={0.1} floatIntensity={0.3}>
-                    <mesh position={[3, -1.2, 0]}>
-                        <boxGeometry args={[3.4, 0.55, 3.4]} />
-                        <meshStandardMaterial color="#1F1F1D" roughness={0.6} metalness={0.85} />
-                    </mesh>
-                </Float>
+                {/* Steel core sphere emerging from below the stack */}
+                <SteelCore position={[3.4, -0.45, 0]} />
 
-                <Sparkles count={40} scale={[7, 5, 5]} size={2} speed={0.3} color="#DDA74F" opacity={0.6} />
+                <Sparkles count={50} scale={[8, 6, 5]} size={2} speed={0.3} color="#DDA74F" opacity={0.7} />
                 <Environment preset="warehouse" />
                 <fog attach="fog" args={["#F5F5F0", 8, 18]} />
             </Suspense>
@@ -167,7 +182,7 @@ function PrimerHero() {
                         <ArrowDown size={14} className="animate-bounce" />
                         <span>Scroll</span>
                     </div>
-                    <div className="flex flex-wrap gap-x-12 gap-y-4 font-heading font-light">
+                    <div className="flex flex-wrap gap-x-10 gap-y-4 font-heading font-light bg-[#F5F5F0]/85 backdrop-blur-md border border-[#D1CEC5] px-6 py-4 rounded-sm">
                         {[
                             { k: "10,000+ h", v: "Salt spray" },
                             { k: "15 yr", v: "Warranty" },
@@ -176,7 +191,7 @@ function PrimerHero() {
                         ].map((stat) => (
                             <div key={stat.k} data-testid={`primer-stat-${stat.k.replace(/[^a-z0-9]/gi, "")}`}>
                                 <div className="text-2xl text-[#1A1A1A]">{stat.k}</div>
-                                <div className="text-[11px] uppercase tracking-[0.2em] text-[#5B7059] mt-1">
+                                <div className="text-[11px] uppercase tracking-[0.2em] text-[#3A4538] mt-1 font-semibold">
                                     {stat.v}
                                 </div>
                             </div>
@@ -405,7 +420,7 @@ const applications = [
         tag: "01 / Marine",
         title: "Hulls, decks, ballast tanks",
         body: "Long-term protection for ocean-going steel exposed to constant immersion, salt and abrasion.",
-        img: "https://images.pexels.com/photos/37582309/pexels-photo-37582309.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        img: "https://images.unsplash.com/photo-1604506522146-316c8bedd874?fm=jpg&q=80&w=1400&auto=format&fit=crop",
         span: "col-span-12 md:col-span-7",
         aspect: "aspect-[16/10]",
     },
@@ -413,7 +428,7 @@ const applications = [
         tag: "02 / Offshore",
         title: "Platforms & risers",
         body: "A coating system specified for splash-zone and atmospheric service on offshore structures.",
-        img: "https://images.unsplash.com/photo-1761476267514-ffec14e7af84?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwzfHxzdG9uZSUyMGZhY2FkZSUyMGJ1aWxkaW5nfGVufDB8fHx8MTc4MjExMTgwOHww&ixlib=rb-4.1.0&q=85",
+        img: "https://images.unsplash.com/photo-1585713181935-d5f622cc2415?fm=jpg&q=80&w=1200&auto=format&fit=crop",
         span: "col-span-12 md:col-span-5",
         aspect: "aspect-[4/5]",
     },
@@ -421,7 +436,7 @@ const applications = [
         tag: "03 / Industrial",
         title: "Bridges & infrastructure",
         body: "High-performance corrosion protection for steel bridges, pipelines, and heavy infrastructure.",
-        img: "https://images.unsplash.com/photo-1628012209120-d9db7abf7eab?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjBhcmNoaXRlY3R1cmUlMjBleHRlcmlvcnxlbnwwfHx8fDE3ODIxMTE4MDh8MA&ixlib=rb-4.1.0&q=85",
+        img: "https://images.pexels.com/photos/37582309/pexels-photo-37582309.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200",
         span: "col-span-12 md:col-span-5",
         aspect: "aspect-[4/5]",
     },
@@ -429,7 +444,7 @@ const applications = [
         tag: "04 / Energy",
         title: "Wind towers & substations",
         body: "Designed for renewable-energy structures where 25-year-plus maintenance cycles are essential.",
-        img: "https://images.pexels.com/photos/15291734/pexels-photo-15291734.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        img: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?fm=jpg&q=80&w=1400&auto=format&fit=crop",
         span: "col-span-12 md:col-span-7",
         aspect: "aspect-[16/10]",
     },
