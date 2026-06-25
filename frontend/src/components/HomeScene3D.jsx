@@ -4,7 +4,7 @@ import { useRef, useLayoutEffect, useMemo, Suspense } from "react";
 import * as THREE from "three";
 
 /* ---------- Atomic bond cylinder ---------- */
-function Bond({ from, to, color = "#C9B89A", thickness = 0.04 }) {
+function Bond({ from, to, color = "#D9CDB5", thickness = 0.025 }) {
     const ref = useRef();
     useLayoutEffect(() => {
         if (!ref.current) return;
@@ -23,13 +23,13 @@ function Bond({ from, to, color = "#C9B89A", thickness = 0.04 }) {
     return (
         <mesh ref={ref}>
             <cylinderGeometry args={[thickness, thickness, 1, 16]} />
-            <meshStandardMaterial color={color} roughness={0.85} metalness={0.1} transparent opacity={0.5} />
+            <meshStandardMaterial color={color} roughness={0.95} metalness={0} transparent opacity={0.3} />
         </mesh>
     );
 }
 
 /* ---------- Atom (sphere) ---------- */
-function Atom({ position, color, radius = 0.45, roughness = 0.85, metalness = 0.05, opacity = 0.55 }) {
+function Atom({ position, color, radius = 0.45, roughness = 0.95, metalness = 0, opacity = 0.32 }) {
     return (
         <Sphere args={[radius, 48, 48]} position={position}>
             <meshStandardMaterial
@@ -54,7 +54,7 @@ function SilicateLattice() {
     });
 
     // Silicon-oxygen tetrahedron vertices, scaled
-    const s = 1.45;
+    const s = 1.1;
     const vertices = useMemo(
         () => [
             [s, s, s],
@@ -66,18 +66,18 @@ function SilicateLattice() {
     );
 
     // Secondary bonded silicate at +x for extended lattice feel
-    const offset = 2.2;
+    const offset = 1.7;
     const offsetCenter = [offset, 0, 0];
     const offsetVertices = vertices.map(([x, y, z]) => [x + offset, y, z]);
 
     return (
-        <group ref={groupRef} position={[0.5, 0, 0]}>
+        <group ref={groupRef} position={[4.5, 0.3, 0]} scale={0.85}>
             {/* Central silicon */}
-            <Atom position={[0, 0, 0]} color="#A89F8F" radius={0.55} />
+            <Atom position={[0, 0, 0]} color="#B8AE9C" radius={0.42} />
 
             {/* Tetrahedral oxygens */}
             {vertices.map((v, i) => (
-                <Atom key={`o-${i}`} position={v} color="#E8E0CC" radius={0.38} />
+                <Atom key={`o-${i}`} position={v} color="#EAE6DA" radius={0.28} />
             ))}
 
             {/* Bonds: center to each oxygen */}
@@ -86,38 +86,38 @@ function SilicateLattice() {
             ))}
 
             {/* Secondary silicon */}
-            <Atom position={offsetCenter} color="#A89F8F" radius={0.5} />
+            <Atom position={offsetCenter} color="#B8AE9C" radius={0.38} />
 
             {/* Shared bridging oxygen between the two silicons */}
-            <Atom position={[offset / 2, 0, 0]} color="#CFA17A" radius={0.32} opacity={0.6} />
+            <Atom position={[offset / 2, 0, 0]} color="#C89F5D" radius={0.24} opacity={0.38} />
             <Bond from={[0, 0, 0]} to={[offset / 2, 0, 0]} />
             <Bond from={[offset / 2, 0, 0]} to={offsetCenter} />
 
             {/* Three remaining oxygens on secondary silicon */}
             {offsetVertices.slice(1).map((v, i) => (
-                <Atom key={`o2-${i}`} position={v} color="#E8E0CC" radius={0.32} />
+                <Atom key={`o2-${i}`} position={v} color="#EAE6DA" radius={0.24} />
             ))}
             {offsetVertices.slice(1).map((v, i) => (
-                <Bond key={`b2-${i}`} from={offsetCenter} to={v} thickness={0.03} />
+                <Bond key={`b2-${i}`} from={offsetCenter} to={v} thickness={0.02} />
             ))}
         </group>
     );
 }
 
 /* ---------- Drifting free atoms (joining the lattice) ---------- */
-function FreeAtom({ position, color, scale = 0.25 }) {
+function FreeAtom({ position, color, scale = 0.18 }) {
     const ref = useRef();
     useFrame((state, delta) => {
         if (ref.current) {
-            ref.current.rotation.y += delta * 0.6;
+            ref.current.rotation.y += delta * 0.4;
             ref.current.position.y =
-                position[1] + Math.sin(state.clock.elapsedTime * 0.7 + position[0]) * 0.25;
+                position[1] + Math.sin(state.clock.elapsedTime * 0.6 + position[0]) * 0.2;
         }
     });
     return (
-        <Float speed={1.3} rotationIntensity={0.4} floatIntensity={0.8}>
+        <Float speed={1.0} rotationIntensity={0.3} floatIntensity={0.6}>
             <Sphere ref={ref} args={[1, 32, 32]} position={position} scale={scale}>
-                <meshStandardMaterial color={color} roughness={0.85} metalness={0.05} transparent opacity={0.55} />
+                <meshStandardMaterial color={color} roughness={0.95} metalness={0} transparent opacity={0.32} />
             </Sphere>
         </Float>
     );

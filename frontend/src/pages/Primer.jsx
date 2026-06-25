@@ -42,10 +42,10 @@ function SteelCore() {
                 position={[3.4, 0.6, 0]}
             >
                 <meshStandardMaterial
-                    color="#9DA3AB"
-                    roughness={0.18}
-                    metalness={0.95}
-                    envMapIntensity={1.5}
+                    color="#3A4538"
+                    roughness={0.88}
+                    metalness={0.05}
+                    flatShading
                 />
             </TorusKnot>
         </Float>
