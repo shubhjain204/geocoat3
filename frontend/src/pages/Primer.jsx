@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useMemo, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { Float, Environment, Sparkles, Icosahedron, TorusKnot } from "@react-three/drei";
+import { Float, Environment, Sparkles, Icosahedron, Sphere } from "@react-three/drei";
 import {
     Shield,
     Layers,
@@ -30,24 +30,19 @@ function SteelCore() {
     const ref = useRef();
     useFrame((_, delta) => {
         if (ref.current) {
-            ref.current.rotation.y += delta * 0.22;
-            ref.current.rotation.x += delta * 0.08;
+            ref.current.rotation.y += delta * 0.18;
+            ref.current.rotation.x += delta * 0.05;
         }
     });
     return (
-        <Float speed={0.5} rotationIntensity={0.15} floatIntensity={0.4}>
-            <TorusKnot
-                ref={ref}
-                args={[0.85, 0.28, 220, 32, 2, 3]}
-                position={[3.4, 0.6, 0]}
-            >
+        <Float speed={0.5} rotationIntensity={0.12} floatIntensity={0.4}>
+            <Sphere ref={ref} args={[1.15, 96, 96]} position={[3.4, 0.6, 0]}>
                 <meshStandardMaterial
-                    color="#3A4538"
-                    roughness={0.88}
-                    metalness={0.05}
-                    flatShading
+                    color="#D4C4A8"
+                    roughness={0.78}
+                    metalness={0.12}
                 />
-            </TorusKnot>
+            </Sphere>
         </Float>
     );
 }
