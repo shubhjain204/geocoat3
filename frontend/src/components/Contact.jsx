@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import axios from "axios";
 import { toast } from "sonner";
 import { Send, Loader2 } from "lucide-react";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+const CONTACT_EMAIL = "studio@geocoat.example";
 
 const projectTypes = [
     "Heritage / Restoration",
@@ -38,8 +36,23 @@ export const Contact = () => {
         }
         setLoading(true);
         try {
-            await axios.post(`${API}/contact`, form);
-            toast.success("Thank you. A GeoCoat specialist will be in touch within 24 hours.");
+            const body = [
+                `Name: ${form.name}`,
+                `Email: ${form.email}`,
+                form.phone ? `Phone: ${form.phone}` : null,
+                `Project type: ${form.project_type}`,
+                "",
+                form.message,
+            ]
+                .filter(Boolean)
+                .join("\n");
+
+            const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+                `GeoCoat enquiry - ${form.project_type}`
+            )}&body=${encodeURIComponent(body)}`;
+
+            window.location.href = mailto;
+            toast.success("Your email app should open with the project details ready to send.");
             setForm({
                 name: "",
                 email: "",
@@ -49,9 +62,7 @@ export const Contact = () => {
             });
         } catch (err) {
             toast.error(
-                err?.response?.data?.detail?.[0]?.msg ||
-                    err?.response?.data?.detail ||
-                    "Could not send your message. Please try again."
+                "Could not open your email app. Please email us directly."
             );
         } finally {
             setLoading(false);
@@ -99,7 +110,7 @@ export const Contact = () => {
                                     Studio
                                 </div>
                                 <div className="font-heading text-xl text-[#F5F5F0] font-light">
-                                    studio@geocoat.example
+                                    {CONTACT_EMAIL}
                                 </div>
                             </div>
                             <div>
