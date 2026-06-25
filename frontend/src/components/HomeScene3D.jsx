@@ -13,9 +13,9 @@ function Monolith() {
     });
     return (
         <Float speed={0.6} rotationIntensity={0.15} floatIntensity={0.7}>
-            <Octahedron ref={ref} args={[1.7, 0]} position={[2.6, 0, 0]}>
+            <Octahedron ref={ref} args={[1.3, 0]} position={[2.8, 0, 0]}>
                 <MeshDistortMaterial
-                    color="#3A4538"
+                    color="#6B5440"
                     roughness={0.92}
                     metalness={0.04}
                     distort={0.08}
@@ -40,7 +40,7 @@ function OrbitRing({ radius, tube, color, axis, speed = 0.3 }) {
         <Torus
             ref={ref}
             args={[radius, tube, 32, 100]}
-            position={[2.6, 0, 0]}
+            position={[2.8, 0, 0]}
             rotation={
                 axis === "x"
                     ? [Math.PI / 3, 0, 0]
@@ -88,14 +88,14 @@ export const HomeScene3D = () => {
                 <Monolith />
 
                 {/* Three gyroscopic rings on different axes */}
-                <OrbitRing radius={2.4} tube={0.04} color="#DDA74F" axis="x" speed={0.25} />
-                <OrbitRing radius={2.85} tube={0.025} color="#C05A45" axis="z" speed={0.18} />
-                <OrbitRing radius={3.3} tube={0.018} color="#5B7059" axis="y" speed={0.22} />
+                <OrbitRing radius={1.9} tube={0.032} color="#DDA74F" axis="x" speed={0.25} />
+                <OrbitRing radius={2.25} tube={0.02} color="#C05A45" axis="z" speed={0.18} />
+                <OrbitRing radius={2.6} tube={0.015} color="#5B7059" axis="y" speed={0.22} />
 
                 {/* Mineral flecks orbiting */}
-                <MineralFleck position={[4.8, 1.4, -0.5]} color="#C05A45" scale={0.18} />
-                <MineralFleck position={[0.1, -1.8, -1]} color="#DDA74F" scale={0.22} />
-                <MineralFleck position={[5.4, -0.5, 0.5]} color="#EAE6DA" scale={0.15} />
+                <MineralFleck position={[4.6, 1.2, -0.5]} color="#C05A45" scale={0.14} />
+                <MineralFleck position={[0.6, -1.6, -1]} color="#DDA74F" scale={0.17} />
+                <MineralFleck position={[5.1, -0.4, 0.5]} color="#EAE6DA" scale={0.12} />
 
                 <Sparkles count={60} scale={[10, 6, 5]} size={2} speed={0.25} color="#DDA74F" opacity={0.7} />
 
