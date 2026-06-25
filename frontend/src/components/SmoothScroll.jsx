@@ -9,13 +9,21 @@ export const SmoothScroll = ({ children }) => {
             smoothWheel: true,
             wheelMultiplier: 1,
         });
+        window.__geoLenis = lenis;
 
+        let frameId;
         function raf(time) {
             lenis.raf(time);
-            requestAnimationFrame(raf);
+            frameId = requestAnimationFrame(raf);
         }
-        requestAnimationFrame(raf);
-        return () => lenis.destroy();
+        frameId = requestAnimationFrame(raf);
+        return () => {
+            cancelAnimationFrame(frameId);
+            if (window.__geoLenis === lenis) {
+                delete window.__geoLenis;
+            }
+            lenis.destroy();
+        };
     }, []);
 
     return <>{children}</>;

@@ -11,10 +11,14 @@ export const ScrollToTop = () => {
     const { pathname } = useLocation();
     useLayoutEffect(() => {
         const reset = () => {
+            window.__geoLenis?.scrollTo?.(0, { immediate: true, force: true });
             window.scrollTo(0, 0);
             if (document.documentElement) document.documentElement.scrollTop = 0;
             if (document.body) document.body.scrollTop = 0;
         };
+        if ("scrollRestoration" in window.history) {
+            window.history.scrollRestoration = "manual";
+        }
         reset();
         const r1 = requestAnimationFrame(reset);
         const r2 = requestAnimationFrame(() => requestAnimationFrame(reset));
