@@ -42,11 +42,6 @@ export const TwoSystems = () => {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-16 md:mb-24"
                 >
-                    <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[#DDA74F] mb-6">
-                        <span className="w-8 h-px bg-[#DDA74F]" />
-                        <span>Our Products</span>
-                        <span className="w-8 h-px bg-[#DDA74F]" />
-                    </div>
                     <h2 className="font-heading text-5xl md:text-7xl lg:text-8xl font-extralight tracking-tight leading-[0.95] text-[#F5F5F0] text-balance">
                         Two systems<span className="text-[#DDA74F]">.</span>{" "}
                         <span className="italic">One standard.</span>
@@ -105,18 +100,6 @@ export const TwoSystems = () => {
                                     <p className="text-sm md:text-base text-[#EAE6DA]/70 leading-relaxed mb-8 max-w-md">
                                         {s.body}
                                     </p>
-
-                                    <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8">
-                                        {s.bullets.map((b) => (
-                                            <div
-                                                key={b}
-                                                className="text-xs uppercase tracking-[0.2em] text-[#DDA74F] flex items-center gap-2"
-                                            >
-                                                <span className="w-1.5 h-1.5 bg-[#DDA74F] rounded-full" />
-                                                {b}
-                                            </div>
-                                        ))}
-                                    </div>
 
                                     <div className="flex items-center justify-between pt-6 border-t border-[#3A4538] group-hover:border-[#DDA74F] transition-colors">
                                         <span className="text-sm uppercase tracking-[0.25em] text-[#F5F5F0]">

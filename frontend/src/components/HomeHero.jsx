@@ -48,11 +48,9 @@ export const HomeHero = () => {
                         transition={{ duration: 1.2, delay: 0.2, ease: [0.86, 0, 0.07, 1] }}
                         className="font-heading font-extralight tracking-tighter leading-[0.92] text-[#1A1A1A] text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] text-balance"
                     >
-                        The chemistry
+                        Mineral chemistry<span className="text-[#C05A45]">.</span>
                         <br />
-                        that <span className="italic font-light text-[#3A4538]">protects</span>
-                        <br />
-                        from <span className="text-[#C05A45]">silica</span> up<span className="text-[#C05A45]">.</span>
+                        <span className="italic font-light text-[#3A4538]">Made</span> permanent.
                     </motion.h1>
 
                     <motion.p
@@ -72,26 +70,11 @@ export const HomeHero = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.3, duration: 1 }}
-                    className="flex flex-wrap items-end justify-between gap-6 pointer-events-auto"
+                    className="flex items-end justify-start gap-6 pointer-events-auto"
                 >
                     <div className="flex items-center gap-2 text-xs tracking-widest uppercase text-[#1A1A1A]">
                         <ArrowDown size={14} className="animate-bounce" />
                         <span>Two systems below</span>
-                    </div>
-                    <div className="flex flex-wrap gap-x-12 gap-y-4 font-heading font-light">
-                        {[
-                            { k: "25+ yrs", v: "Formulating" },
-                            { k: "100%", v: "VOC-free" },
-                            { k: "A1", v: "Fire rating" },
-                            { k: "10,000+ hrs", v: "Salt spray" },
-                        ].map((stat) => (
-                            <div key={stat.k} data-testid={`home-stat-${stat.k.replace(/\s/g, "")}`}>
-                                <div className="text-2xl text-[#1A1A1A]">{stat.k}</div>
-                                <div className="text-[11px] uppercase tracking-[0.2em] text-[#5B7059] mt-1">
-                                    {stat.v}
-                                </div>
-                            </div>
-                        ))}
                     </div>
                 </motion.div>
             </motion.div>
