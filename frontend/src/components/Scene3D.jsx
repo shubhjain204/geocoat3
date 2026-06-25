@@ -1,7 +1,6 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Environment, MeshDistortMaterial, Icosahedron, Sparkles } from "@react-three/drei";
 import { useRef, Suspense } from "react";
-import * as THREE from "three";
 
 function MineralCrystal({ position, color, scale, speed = 1, distort = 0.25 }) {
     const ref = useRef();
@@ -59,11 +58,11 @@ export const Scene3D = () => {
                 <directionalLight position={[-3, -2, -4]} intensity={0.4} color="#C05A45" />
                 <pointLight position={[0, 0, 3]} intensity={0.4} color="#DDA74F" />
 
-                <MineralCrystal position={[0, 0.2, 0]} color="#3A4538" scale={1.4} speed={0.8} distort={0.18} />
-                <MineralCrystal position={[2.2, 1.1, -1]} color="#C05A45" scale={0.55} speed={1.2} distort={0.3} />
-                <MineralCrystal position={[-2.1, -0.6, -0.5]} color="#DDA74F" scale={0.7} speed={1.0} distort={0.25} />
-                <MineralCrystal position={[1.6, -1.4, 0.5]} color="#EAE6DA" scale={0.45} speed={1.4} distort={0.35} />
-                <ArchitecturalBlock position={[-2.6, 1.3, -2]} color="#EAE6DA" scale={[0.4, 0.7, 0.4]} />
+                <MineralCrystal position={[2.4, 0.2, 0]} color="#EAE6DA" scale={1.45} speed={0.8} distort={0.18} />
+                <MineralCrystal position={[3.4, 1.5, -1]} color="#C05A45" scale={0.55} speed={1.2} distort={0.3} />
+                <MineralCrystal position={[1.2, -1.6, 0.4]} color="#DDA74F" scale={0.6} speed={1.0} distort={0.25} />
+                <MineralCrystal position={[3.6, -0.6, 0.3]} color="#5B7059" scale={0.4} speed={1.4} distort={0.35} />
+                <ArchitecturalBlock position={[4.0, 0.3, -2]} color="#3A4538" scale={[0.4, 0.7, 0.4]} />
 
                 <Sparkles count={40} scale={[8, 6, 4]} size={2} speed={0.3} color="#DDA74F" opacity={0.6} />
 

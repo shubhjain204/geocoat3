@@ -19,7 +19,7 @@ export const About = () => {
                     >
                         <div className="sticky top-32 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[#C05A45]">
                             <span className="w-8 h-px bg-[#C05A45]" />
-                            <span>Studio Note 01</span>
+                            <span>Core Chemistry</span>
                         </div>
                     </motion.div>
 
