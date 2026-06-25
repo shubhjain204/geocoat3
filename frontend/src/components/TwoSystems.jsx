@@ -64,7 +64,7 @@ export const TwoSystems = () => {
                         >
                             <Link
                                 to={s.to}
-                                className="group block relative bg-[#1F2A1F]/40 border border-[#3A4538] hover:border-[#DDA74F] transition-all duration-500 hover:-translate-y-1 h-full"
+                                className="group flex flex-col h-full relative bg-[#1F2A1F]/40 border border-[#3A4538] hover:border-[#DDA74F] transition-all duration-500 hover:-translate-y-1"
                             >
                                 <div className="relative aspect-[16/10] overflow-hidden">
                                     <img
@@ -93,15 +93,15 @@ export const TwoSystems = () => {
                                     </div>
                                 </div>
 
-                                <div className="p-8 md:p-10">
+                                <div className="p-8 md:p-10 flex-1 flex flex-col">
                                     <h3 className="font-heading text-3xl md:text-4xl font-light text-[#F5F5F0] mb-4 leading-tight">
                                         {s.title}
                                     </h3>
-                                    <p className="text-sm md:text-base text-[#EAE6DA]/70 leading-relaxed mb-8 max-w-md">
+                                    <p className="text-sm md:text-base text-[#EAE6DA]/70 leading-relaxed max-w-md">
                                         {s.body}
                                     </p>
 
-                                    <div className="flex items-center justify-between pt-6 border-t border-[#3A4538] group-hover:border-[#DDA74F] transition-colors">
+                                    <div className="mt-auto pt-10 flex items-center justify-between border-t border-[#3A4538] group-hover:border-[#DDA74F] transition-colors">
                                         <span className="text-sm uppercase tracking-[0.25em] text-[#F5F5F0]">
                                             Explore the system
                                         </span>

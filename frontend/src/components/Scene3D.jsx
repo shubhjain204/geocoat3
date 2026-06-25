@@ -60,7 +60,7 @@ export const Scene3D = () => {
 
                 <MineralCrystal position={[0, 0.2, 0]} color="#C89F5D" scale={1.4} speed={0.8} distort={0.18} />
                 <MineralCrystal position={[2.2, 1.1, -1]} color="#C05A45" scale={0.55} speed={1.2} distort={0.3} />
-                <MineralCrystal position={[-2.1, -0.6, -0.5]} color="#DDA74F" scale={0.7} speed={1.0} distort={0.25} />
+                <MineralCrystal position={[-2.1, -0.6, -0.5]} color="#D9CDB5" scale={0.7} speed={1.0} distort={0.25} />
                 <MineralCrystal position={[1.6, -1.4, 0.5]} color="#EAE6DA" scale={0.45} speed={1.4} distort={0.35} />
                 <ArchitecturalBlock position={[-2.6, 1.3, -2]} color="#EAE6DA" scale={[0.4, 0.7, 0.4]} />
 

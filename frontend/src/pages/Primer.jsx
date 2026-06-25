@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, Suspense } from "react";
+import { useRef, useMemo, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Environment, Sparkles, Cylinder, Sphere } from "@react-three/drei";
+import * as THREE from "three";
+import { Float, Environment, Sparkles, Sphere, Icosahedron } from "@react-three/drei";
 import {
     Shield,
     Layers,
@@ -20,39 +21,72 @@ import { Navigation } from "@/components/Navigation";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
-/* ---------- 3D scene: exploded three-layer coating system ----------
-   Cylindrical discs slightly tilted + a steel sphere emerging from beneath. */
-function LayerDisc({ position, color, rotationSpeed = 0.2, scale = 1 }) {
-    const ref = useRef();
-    useFrame((_, delta) => {
-        if (ref.current) ref.current.rotation.y += delta * rotationSpeed;
-    });
-    return (
-        <Float speed={0.6} rotationIntensity={0.18} floatIntensity={0.6}>
-            <Cylinder
-                ref={ref}
-                args={[1.7, 1.7, 0.18, 64]}
-                position={position}
-                rotation={[Math.PI / 14, 0, Math.PI / 22]}
-                scale={scale}
-            >
-                <meshStandardMaterial color={color} roughness={0.85} metalness={0.25} flatShading />
-            </Cylinder>
-        </Float>
-    );
-}
+/* ---------- 3D scene: polished steel core with mineral protective shell ----------
+   Conveys "steel becoming rust-free" — chrome sphere = pristine steel,
+   golden wireframe icosahedron = mineral primer shield,
+   rust-colored flecks expelled to the edges = corrosion being driven away. */
 
-function SteelCore({ position }) {
+function SteelCore() {
     const ref = useRef();
     useFrame((_, delta) => {
         if (ref.current) ref.current.rotation.y += delta * 0.18;
     });
     return (
-        <Float speed={0.4} rotationIntensity={0.1} floatIntensity={0.35}>
-            <Sphere ref={ref} args={[1.05, 64, 64]} position={position}>
-                <meshStandardMaterial color="#26241F" roughness={0.35} metalness={0.95} />
+        <Float speed={0.5} rotationIntensity={0.1} floatIntensity={0.35}>
+            <Sphere ref={ref} args={[1.25, 96, 96]} position={[3.4, 0.6, 0]}>
+                <meshStandardMaterial
+                    color="#A8AEB6"
+                    roughness={0.08}
+                    metalness={1}
+                    envMapIntensity={1.6}
+                />
             </Sphere>
         </Float>
+    );
+}
+
+function ProtectiveShell({ radius, color, opacity, speed, axis }) {
+    const ref = useRef();
+    useFrame((_, delta) => {
+        if (!ref.current) return;
+        if (axis === "x") ref.current.rotation.x += delta * speed;
+        if (axis === "y") ref.current.rotation.y += delta * speed;
+        if (axis === "z") ref.current.rotation.z += delta * speed;
+    });
+    return (
+        <Icosahedron ref={ref} args={[radius, 1]} position={[3.4, 0.6, 0]}>
+            <meshStandardMaterial color={color} wireframe transparent opacity={opacity} />
+        </Icosahedron>
+    );
+}
+
+function RustFleck({ origin, target, delay = 0 }) {
+    const ref = useRef();
+    const from = useMemo(() => new THREE.Vector3(...origin), [origin]);
+    const dir = useMemo(
+        () => new THREE.Vector3(...target).sub(from).normalize(),
+        [from, target]
+    );
+    useFrame((state) => {
+        if (!ref.current) return;
+        const t = ((state.clock.elapsedTime + delay) % 4) / 4; // 0 → 1
+        const pos = from.clone().add(dir.clone().multiplyScalar(t * 3));
+        ref.current.position.copy(pos);
+        if (ref.current.material) {
+            ref.current.material.opacity = Math.max(0, 1 - t);
+        }
+    });
+    return (
+        <mesh ref={ref}>
+            <icosahedronGeometry args={[0.08, 0]} />
+            <meshStandardMaterial
+                color="#A0432B"
+                roughness={0.85}
+                metalness={0.1}
+                transparent
+                opacity={1}
+            />
+        </mesh>
     );
 }
 
@@ -60,25 +94,33 @@ function PrimerScene() {
     return (
         <Canvas
             data-testid="primer-3d-canvas"
-            camera={{ position: [3.4, 2.1, 6], fov: 42 }}
+            camera={{ position: [3.5, 1.8, 6], fov: 42 }}
             dpr={[1, 2]}
             gl={{ antialias: true, alpha: true }}
         >
             <Suspense fallback={null}>
                 <ambientLight intensity={0.55} />
-                <directionalLight position={[5, 6, 4]} intensity={1.35} color="#FFE9C8" />
-                <directionalLight position={[-4, -2, -3]} intensity={0.4} color="#3A4538" />
-                <pointLight position={[1, 3, 3]} intensity={0.55} color="#DDA74F" />
+                <directionalLight position={[6, 6, 4]} intensity={1.4} color="#FFE9C8" />
+                <directionalLight position={[-3, -2, -3]} intensity={0.4} color="#3A4538" />
+                <pointLight position={[2, 3, 3]} intensity={0.65} color="#DDA74F" />
 
-                {/* Three exploded layer discs above */}
-                <LayerDisc position={[3.4, 2.2, 0]} color="#3A4538" rotationSpeed={0.15} scale={1.05} />
-                <LayerDisc position={[3.4, 1.55, 0]} color="#C89F5D" rotationSpeed={0.2} scale={0.98} />
-                <LayerDisc position={[3.4, 0.9, 0]} color="#5C5751" rotationSpeed={0.25} scale={0.94} />
+                {/* Pristine steel core */}
+                <SteelCore />
 
-                {/* Steel core sphere emerging from below the stack */}
-                <SteelCore position={[3.4, -0.45, 0]} />
+                {/* Three concentric protective lattices */}
+                <ProtectiveShell radius={1.7} color="#DDA74F" opacity={0.55} speed={0.18} axis="y" />
+                <ProtectiveShell radius={2.0} color="#C89F5D" opacity={0.35} speed={0.12} axis="x" />
+                <ProtectiveShell radius={2.35} color="#5C5751" opacity={0.22} speed={0.09} axis="z" />
 
-                <Sparkles count={50} scale={[8, 6, 5]} size={2} speed={0.3} color="#DDA74F" opacity={0.7} />
+                {/* Rust flecks being repelled outward in 6 directions */}
+                <RustFleck origin={[3.4, 0.6, 0]} target={[5.5, 2.0, 0.6]} delay={0} />
+                <RustFleck origin={[3.4, 0.6, 0]} target={[5.6, -0.4, -0.6]} delay={1.2} />
+                <RustFleck origin={[3.4, 0.6, 0]} target={[2.6, 2.4, 0.4]} delay={2.4} />
+                <RustFleck origin={[3.4, 0.6, 0]} target={[1.8, -1.0, 0.5]} delay={0.6} />
+                <RustFleck origin={[3.4, 0.6, 0]} target={[4.5, -1.8, -0.7]} delay={3.0} />
+                <RustFleck origin={[3.4, 0.6, 0]} target={[2.0, 1.6, -0.8]} delay={1.8} />
+
+                <Sparkles count={60} scale={[8, 6, 5]} size={2} speed={0.3} color="#DDA74F" opacity={0.7} />
                 <Environment preset="warehouse" />
                 <fog attach="fog" args={["#F5F5F0", 8, 18]} />
             </Suspense>

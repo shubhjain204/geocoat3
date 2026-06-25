@@ -1,65 +1,118 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Environment, Sparkles, Octahedron, Torus, MeshDistortMaterial } from "@react-three/drei";
-import { useRef, Suspense } from "react";
+import { Float, Environment, Sparkles, Sphere } from "@react-three/drei";
+import { useRef, useLayoutEffect, useMemo, Suspense } from "react";
+import * as THREE from "three";
 
-/* A single rotating mineral monolith (octahedron) with concentric orbiting rings —
-   intentionally different from the Paint page's icosahedron cluster. */
-
-function Monolith() {
+/* ---------- Atomic bond cylinder ---------- */
+function Bond({ from, to, color = "#8C7355", thickness = 0.05 }) {
     const ref = useRef();
-    useFrame((_, delta) => {
-        if (ref.current) {
-            ref.current.rotation.y += delta * 0.18;
-            ref.current.rotation.x += delta * 0.04;
-        }
-    });
+    useLayoutEffect(() => {
+        if (!ref.current) return;
+        const a = new THREE.Vector3(...from);
+        const b = new THREE.Vector3(...to);
+        const mid = a.clone().add(b).multiplyScalar(0.5);
+        const dir = b.clone().sub(a);
+        const len = dir.length();
+        ref.current.position.copy(mid);
+        ref.current.scale.set(1, len, 1);
+        ref.current.quaternion.setFromUnitVectors(
+            new THREE.Vector3(0, 1, 0),
+            dir.clone().normalize()
+        );
+    }, [from, to]);
     return (
-        <Float speed={0.6} rotationIntensity={0.15} floatIntensity={0.7}>
-            <Octahedron ref={ref} args={[1.7, 0]} position={[1.4, 0, 0]}>
-                <MeshDistortMaterial
-                    color="#3A4538"
-                    roughness={0.92}
-                    metalness={0.04}
-                    distort={0.08}
-                    speed={0.7}
-                    flatShading
-                />
-            </Octahedron>
-        </Float>
+        <mesh ref={ref}>
+            <cylinderGeometry args={[thickness, thickness, 1, 16]} />
+            <meshStandardMaterial color={color} roughness={0.55} metalness={0.35} />
+        </mesh>
     );
 }
 
-function OrbitRing({ radius, tube, color, axis, speed = 0.3 }) {
-    const ref = useRef();
-    useFrame((_, delta) => {
-        if (ref.current) {
-            if (axis === "x") ref.current.rotation.x += delta * speed;
-            if (axis === "y") ref.current.rotation.y += delta * speed;
-            if (axis === "z") ref.current.rotation.z += delta * speed;
-        }
-    });
+/* ---------- Atom (sphere) ---------- */
+function Atom({ position, color, radius = 0.45, roughness = 0.7, metalness = 0.1 }) {
     return (
-        <Torus
-            ref={ref}
-            args={[radius, tube, 32, 100]}
-            position={[1.4, 0, 0]}
-            rotation={axis === "x" ? [Math.PI / 3, 0, 0] : axis === "z" ? [0, 0, Math.PI / 4] : [0, 0, 0]}
-        >
-            <meshStandardMaterial color={color} roughness={0.7} metalness={0.3} flatShading />
-        </Torus>
+        <Sphere args={[radius, 48, 48]} position={position}>
+            <meshStandardMaterial color={color} roughness={roughness} metalness={metalness} />
+        </Sphere>
     );
 }
 
-function MineralFleck({ position, color, scale }) {
-    const ref = useRef();
+/* ---------- Silicate tetrahedron + extended bonding lattice ---------- */
+function SilicateLattice() {
+    const groupRef = useRef();
     useFrame((_, delta) => {
-        if (ref.current) ref.current.rotation.y += delta * 0.4;
+        if (groupRef.current) {
+            groupRef.current.rotation.y += delta * 0.12;
+            groupRef.current.rotation.x += delta * 0.025;
+        }
+    });
+
+    // Silicon-oxygen tetrahedron vertices, scaled
+    const s = 1.45;
+    const vertices = useMemo(
+        () => [
+            [s, s, s],
+            [s, -s, -s],
+            [-s, s, -s],
+            [-s, -s, s],
+        ],
+        []
+    );
+
+    // Secondary bonded silicate at +x for extended lattice feel
+    const offset = 2.2;
+    const offsetCenter = [offset, 0, 0];
+    const offsetVertices = vertices.map(([x, y, z]) => [x + offset, y, z]);
+
+    return (
+        <group ref={groupRef} position={[0.5, 0, 0]}>
+            {/* Central silicon */}
+            <Atom position={[0, 0, 0]} color="#5C5751" radius={0.55} roughness={0.4} metalness={0.4} />
+
+            {/* Tetrahedral oxygens */}
+            {vertices.map((v, i) => (
+                <Atom key={`o-${i}`} position={v} color="#D9CDB5" radius={0.38} />
+            ))}
+
+            {/* Bonds: center to each oxygen */}
+            {vertices.map((v, i) => (
+                <Bond key={`b-${i}`} from={[0, 0, 0]} to={v} color="#C89F5D" />
+            ))}
+
+            {/* Secondary silicon */}
+            <Atom position={offsetCenter} color="#5C5751" radius={0.5} roughness={0.4} metalness={0.4} />
+
+            {/* Shared bridging oxygen between the two silicons */}
+            <Atom position={[offset / 2, 0, 0]} color="#C05A45" radius={0.32} />
+            <Bond from={[0, 0, 0]} to={[offset / 2, 0, 0]} color="#C89F5D" />
+            <Bond from={[offset / 2, 0, 0]} to={offsetCenter} color="#C89F5D" />
+
+            {/* Three remaining oxygens on secondary silicon */}
+            {offsetVertices.slice(1).map((v, i) => (
+                <Atom key={`o2-${i}`} position={v} color="#D9CDB5" radius={0.32} />
+            ))}
+            {offsetVertices.slice(1).map((v, i) => (
+                <Bond key={`b2-${i}`} from={offsetCenter} to={v} color="#C89F5D" thickness={0.04} />
+            ))}
+        </group>
+    );
+}
+
+/* ---------- Drifting free atoms (joining the lattice) ---------- */
+function FreeAtom({ position, color, scale = 0.25 }) {
+    const ref = useRef();
+    useFrame((state, delta) => {
+        if (ref.current) {
+            ref.current.rotation.y += delta * 0.6;
+            ref.current.position.y =
+                position[1] + Math.sin(state.clock.elapsedTime * 0.7 + position[0]) * 0.25;
+        }
     });
     return (
-        <Float speed={1.4} rotationIntensity={0.6} floatIntensity={1.2}>
-            <Octahedron ref={ref} args={[1, 0]} position={position} scale={scale}>
-                <meshStandardMaterial color={color} roughness={0.85} metalness={0.05} flatShading />
-            </Octahedron>
+        <Float speed={1.3} rotationIntensity={0.4} floatIntensity={0.8}>
+            <Sphere ref={ref} args={[1, 32, 32]} position={position} scale={scale}>
+                <meshStandardMaterial color={color} roughness={0.7} metalness={0.1} />
+            </Sphere>
         </Float>
     );
 }
@@ -68,34 +121,29 @@ export const HomeScene3D = () => {
     return (
         <Canvas
             data-testid="home-3d-canvas"
-            camera={{ position: [0, 0.5, 7], fov: 45 }}
+            camera={{ position: [0, 0.4, 8], fov: 45 }}
             dpr={[1, 2]}
             gl={{ antialias: true, alpha: true }}
             style={{ background: "transparent" }}
         >
             <Suspense fallback={null}>
                 <ambientLight intensity={0.55} />
-                <directionalLight position={[5, 6, 4]} intensity={1.3} color="#FFE9C8" />
-                <directionalLight position={[-4, -3, -3]} intensity={0.5} color="#C05A45" />
-                <pointLight position={[2, 0, 3]} intensity={0.6} color="#DDA74F" />
+                <directionalLight position={[5, 6, 5]} intensity={1.2} color="#FFE9C8" />
+                <directionalLight position={[-5, -2, -3]} intensity={0.45} color="#C05A45" />
+                <pointLight position={[2, 1, 3]} intensity={0.45} color="#DDA74F" />
 
-                {/* Central monolith */}
-                <Monolith />
+                <SilicateLattice />
 
-                {/* Concentric rings */}
-                <OrbitRing radius={2.4} tube={0.04} color="#DDA74F" axis="x" speed={0.25} />
-                <OrbitRing radius={2.85} tube={0.025} color="#C05A45" axis="z" speed={0.18} />
-                <OrbitRing radius={3.3} tube={0.018} color="#5B7059" axis="y" speed={0.22} />
+                {/* Free atoms drifting toward the lattice */}
+                <FreeAtom position={[-3.4, 1.4, 0]} color="#D9CDB5" scale={0.3} />
+                <FreeAtom position={[-3.0, -1.8, 0.5]} color="#C05A45" scale={0.22} />
+                <FreeAtom position={[4.6, 1.8, -0.5]} color="#D9CDB5" scale={0.28} />
+                <FreeAtom position={[5.0, -1.5, 0]} color="#C89F5D" scale={0.24} />
 
-                {/* Small flecks orbiting */}
-                <MineralFleck position={[3.6, 1.4, -0.5]} color="#C05A45" scale={0.18} />
-                <MineralFleck position={[-1.2, -1.8, -1]} color="#DDA74F" scale={0.22} />
-                <MineralFleck position={[4.2, -0.5, 0.5]} color="#EAE6DA" scale={0.15} />
-
-                <Sparkles count={60} scale={[10, 6, 5]} size={2} speed={0.25} color="#DDA74F" opacity={0.7} />
+                <Sparkles count={60} scale={[12, 7, 5]} size={2} speed={0.25} color="#DDA74F" opacity={0.65} />
 
                 <Environment preset="apartment" />
-                <fog attach="fog" args={["#F5F5F0", 9, 20]} />
+                <fog attach="fog" args={["#F5F5F0", 9, 22]} />
             </Suspense>
         </Canvas>
     );
