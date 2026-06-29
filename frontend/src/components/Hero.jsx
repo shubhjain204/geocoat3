@@ -64,8 +64,8 @@ export const Hero = () => {
                         className="mt-10 max-w-xl text-base md:text-lg text-[#5B7059] leading-relaxed"
                     >
                         GeoCoat is a next-generation mineral silicate paint that fuses chemically
-                        with mineral substrates — producing finishes that breathe, weather, and
-                        last for generations.
+                        with mineral substrates — producing non-peeling surfaces that are breathable and built to 
+                        last for decades.
                     </motion.p>
 
                     <motion.div
