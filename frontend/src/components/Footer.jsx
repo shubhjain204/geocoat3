@@ -23,9 +23,7 @@ export const Footer = () => {
                             </div>
                         </div>
                         <p className="text-sm leading-relaxed max-w-md text-[#EAE6DA]/70">
-                            A new chemistry of paint — pigments from the earth, bound
-                            chemically to the surfaces they protect. Breathable. Permanent.
-                            Honest.
+                            A new approach to protect assets - architectural and industrial. It protect the assets from weathering and other natural effects. 
                         </p>
                     </div>
 
