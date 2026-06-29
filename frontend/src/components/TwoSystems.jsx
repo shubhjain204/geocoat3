@@ -8,7 +8,7 @@ const systems = [
         to: "/paint",
         tag: "Architectural",
         title: "Mineral Silicate Paint",
-        body: "Vapour-permeable, UV-stable coating for concrete and mineral facades. Bonds chemically with the substrate — no peeling, no blistering, decades of color-true protection.",
+        body: "Vapour-permeable, UV-stable coating for concrete and mineral facades. Bonds chemically with the substrate — no peeling, no blistering.",
         bullets: ["8 mineral hues", "60+ yr color fastness", "Heritage approved"],
         cover: "https://images.unsplash.com/photo-1761476267514-ffec14e7af84?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwzfHxzdG9uZSUyMGZhY2FkZSUyMGJ1aWxkaW5nfGVufDB8fHx8MTc4MjExMTgwOHww&ixlib=rb-4.1.0&q=85",
         swatch: "#C89F5D",
