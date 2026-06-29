@@ -14,7 +14,7 @@ const steps = [
     {
         n: "03",
         title: "Pigment formulation",
-        body: "Color is mixed from inorganic mineral pigments per spec — small-batch, fully traceable, fade-proof.",
+        body: "Color is mixed from inorganic mineral pigments per spec - small-batch, fully traceable, fade-proof.",
     },
     {
         n: "04",
@@ -24,7 +24,7 @@ const steps = [
     {
         n: "05",
         title: "A finish that becomes the wall",
-        body: "After cure, the paint is the wall — vapour-open, UV-stable, fire-rated, color-fast for generations.",
+        body: "After cure, the paint is the wall - vapour-open, UV-stable, fire-rated, color-fast for generations.",
     },
 ];
 
