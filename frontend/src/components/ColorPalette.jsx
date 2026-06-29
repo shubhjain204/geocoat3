@@ -36,8 +36,6 @@ export const ColorPalette = () => {
                     </div>
                     <h2 className="col-span-12 lg:col-span-9 font-heading text-4xl md:text-6xl lg:text-7xl font-extralight tracking-tight leading-[0.95] text-[#1A1A1A] text-balance">
                         A library of <span className="italic text-[#3A4538]">earth.</span>
-                        <br />
-                        Eight permanent mineral hues.
                     </h2>
                 </motion.div>
 
