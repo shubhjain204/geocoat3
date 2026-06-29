@@ -23,7 +23,7 @@ export const Footer = () => {
                             </div>
                         </div>
                         <p className="text-sm leading-relaxed max-w-md text-[#EAE6DA]/70">
-                            A new approach to protect assets - architectural and industrial. It protect the assets from weathering and other natural effects. 
+                            A new approach to protect assets - architectural and industrial. We protect the assets from weathering and other natural effects. 
                         </p>
                     </div>
 
