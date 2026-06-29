@@ -18,7 +18,7 @@ const systems = [
         to: "/primer",
         tag: "Industrial",
         title: "Mineral Silicate Anti-Corrosion Primer",
-        body: "A mineral silicate based primer engineered for steel structure, atmospheric conditions, splash zones and industrial applications. This primer requires top coat for total protection.",
+        body: "A mineral silicate based primer engineered for steel structure, atmospheric conditions, splash zones and industrial applications. This primer requires topcoat for total protection.",
         bullets: ["10,000+ hrs salt spray", "15-yr primer warranty", "−40 °C to 150 °C"],
         cover: "https://images.pexels.com/photos/31616703/pexels-photo-31616703.jpeg",
         swatch: "#3A4538",
