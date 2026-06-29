@@ -58,7 +58,7 @@ export const Applications = () => {
                     </div>
                     <h2 className="col-span-12 lg:col-span-9 font-heading text-4xl md:text-6xl lg:text-7xl font-extralight tracking-tight leading-[0.95] text-[#F5F5F0] text-balance">
                         Wherever the wall is{" "}
-                        <span className="italic text-[#DDA74F]">mineral</span>, GeoCoat belongs.
+                        <span className="italic text-[#DDA74F]">GeoCoat/span> belongs.
                     </h2>
                 </motion.div>
 
