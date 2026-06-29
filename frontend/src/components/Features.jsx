@@ -5,7 +5,7 @@ const features = [
     {
         icon: Wind,
         title: "Breathable",
-        meta: "Vapour permeability µ < 5",
+        meta: "Vapour permeable",
         body: "Walls release moisture freely, preventing damp, mould, and structural decay.",
         span: "md:col-span-6 md:row-span-2",
         accent: "#3A4538",
@@ -30,14 +30,14 @@ const features = [
     {
         icon: Sun,
         title: "UV-stable",
-        meta: "60+ years color fastness",
+        meta: "Decades of color fastness",
         body: "Mineral pigments are inorganic — they cannot fade like organic dyes.",
         span: "md:col-span-3",
         accent: "#5B7059",
     },
     {
         icon: Leaf,
-        title: "0 VOC",
+        title: "ZERO VOC",
         meta: "No emissions, ever",
         body: "Safe for interiors, hospitals, schools, and ecologically sensitive sites.",
         span: "md:col-span-3",
