@@ -21,7 +21,7 @@ const applications = [
         tag: "03 / Commercial",
         title: "Offices, hospitality, cultural",
         body: "Low-maintenance facades and interiors that outlast paint cycles by decades, reducing whole-life cost.",
-        img: "https://images.pexels.com/photos/15291734/pexels-photo-15291734.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        img: "https://images.pexels.com/photos/28785359/pexels-photo-28785359.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
         span: "col-span-12 md:col-span-5",
         aspect: "aspect-[4/5]",
     },
