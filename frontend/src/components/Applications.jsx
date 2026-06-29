@@ -29,7 +29,7 @@ const applications = [
         tag: "04 / Institutional",
         title: "Hospitals, schools, museums",
         body: "Zero VOC, fire-rated A1, algae-resistant — built for high-occupancy, high-sensitivity environments.",
-        img: "https://images.unsplash.com/photo-1708894462826-ba3fa93b41b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwxfHxtaW5lcmFsJTIwcGFpbnQlMjB0ZXh0dXJlfGVufDB8fHx8MTc4MjExMTgwOHww&ixlib=rb-4.1.0&q=85",
+        img: "https://images.unsplash.com/photo-1622650049370-3957f114ec60?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         span: "col-span-12 md:col-span-7",
         aspect: "aspect-[16/11]",
     },
