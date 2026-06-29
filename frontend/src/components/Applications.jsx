@@ -28,7 +28,7 @@ const applications = [
     {
         tag: "04 / Institutional",
         title: "Hospitals, schools, museums",
-        body: "Zero VOC, fire-rated A1, algae-resistant — built for high-occupancy, high-sensitivity environments.",
+        body: "Zero VOC, fire-rated A1, algae-resistant - built for high-occupancy, high-sensitivity environments.",
         img: "https://images.unsplash.com/photo-1622650049370-3957f114ec60?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         span: "col-span-12 md:col-span-7",
         aspect: "aspect-[16/11]",
@@ -58,7 +58,7 @@ export const Applications = () => {
                     </div>
                     <h2 className="col-span-12 lg:col-span-9 font-heading text-4xl md:text-6xl lg:text-7xl font-extralight tracking-tight leading-[0.95] text-[#F5F5F0] text-balance">
                         Wherever the wall is{" "}
-                        <span className="italic text-[#DDA74F]">GeoCoat/span> belongs.
+                        <span className="italic text-[#DDA74F]">GeoCoat</span> belongs.
                     </h2>
                 </motion.div>
 
