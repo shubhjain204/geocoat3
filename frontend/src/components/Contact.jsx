@@ -99,9 +99,7 @@ export const Contact = () => {
                             <span className="italic text-[#DDA74F]">surface.</span>
                         </h2>
                         <p className="text-base md:text-lg text-[#EAE6DA]/80 leading-relaxed mb-12 max-w-md">
-                            Send a brief about your project. We'll respond within 24 hours
-                            with sample chips, technical data, and a certified applicator
-                            in your region.
+                            Send us details about your project and let's discuss how can we help you.
                         </p>
 
                         <div className="space-y-6">
