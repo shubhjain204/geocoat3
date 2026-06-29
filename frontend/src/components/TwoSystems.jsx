@@ -16,11 +16,11 @@ const systems = [
     {
         slug: "primer",
         to: "/primer",
-        tag: "Marine & Offshore",
+        tag: "Industrial",
         title: "Mineral Silicate Anti-Corrosion Primer",
         body: "A three-layer system engineered for steel in splash zones, subsea and atmospheric conditions. Sacrificial zinc, lamellar barrier, polyurethane topcoat — total protection.",
         bullets: ["10,000+ hrs salt spray", "15-yr primer warranty", "−40 °C to 150 °C"],
-        cover: "https://images.unsplash.com/photo-1708894462826-ba3fa93b41b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwxfHxtaW5lcmFsJTIwcGFpbnQlMjB0ZXh0dXJlfGVufDB8fHx8MTc4MjExMTgwOHww&ixlib=rb-4.1.0&q=85",
+        cover: "https://images.pexels.com/photos/31616703/pexels-photo-31616703.jpeg",
         swatch: "#3A4538",
     },
 ];
@@ -47,8 +47,7 @@ export const TwoSystems = () => {
                         <span className="italic">One standard.</span>
                     </h2>
                     <p className="mt-8 max-w-2xl mx-auto text-base md:text-lg text-[#EAE6DA]/70 leading-relaxed">
-                        Both products share the same uncompromising mineral chemistry —
-                        only the application differs. Choose the system built for your surface.
+                        Both products share the same uncompromising mineral chemistry. One tailored for architectural purposes and another tailored for anti-corrosion purposes.
                     </p>
                 </motion.div>
 
