@@ -64,11 +64,6 @@ export const Process = () => {
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <p className="text-sm text-[#5B7059] leading-relaxed max-w-md">
-                                Every project is overseen by a GeoCoat-certified applicator.
-                                Our chemistry only works when applied correctly — so we don't
-                                sell to just anyone.
-                            </p>
                         </div>
                     </div>
 
