@@ -59,8 +59,8 @@ export const Process = () => {
                         <div className="lg:sticky lg:top-32">
                             <div className="aspect-[4/5] overflow-hidden mb-6">
                                 <img
-                                    src="https://images.pexels.com/photos/15291734/pexels-photo-15291734.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                                    alt="Mineral surface detail"
+                                    src="https://images.pexels.com/photos/7218579/pexels-photo-7218579.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200"
+                                    alt="Applicator rolling mineral coating onto a wall"
                                     className="w-full h-full object-cover"
                                 />
                             </div>
