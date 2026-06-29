@@ -5,7 +5,7 @@ const applications = [
         tag: "01 / Heritage",
         title: "Conservation & restoration",
         body: "The only category of paint approved by conservators for lime plaster, sandstone, and historic masonry. Restores without sealing.",
-        img: "https://images.pexels.com/photos/37582309/pexels-photo-37582309.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        img: "https://images.pexels.com/photos/33230289/pexels-photo-33230289.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
         span: "col-span-12 md:col-span-7",
         aspect: "aspect-[16/11]",
     },
