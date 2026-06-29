@@ -49,7 +49,7 @@ export const About = () => {
                                     p: "Only natural iron oxides and mineral pigments. Inert. Permanent. Color-true for decades.",
                                 },
                                 {
-                                    h: "A second skin for buildings",
+                                    h: "A breathable paint for buildings",
                                     p: "Breathable, vapour-permeable, fire-rated A1. The original sustainable paint, refined for the modern era.",
                                 },
                             ].map((item) => (
