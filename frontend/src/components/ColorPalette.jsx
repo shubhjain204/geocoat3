@@ -6,8 +6,6 @@ const palette = [
     { code: "GC 07", name: "Bone Sand", hex: "#D9CDB5", desc: "An organic neutral, equally at home in heritage or modern interiors." },
     { code: "GC 14", name: "Ochre Earth", hex: "#C89F5D", desc: "Iron-oxide ochre — the original pigment of human history." },
     { code: "GC 22", name: "Terracotta", hex: "#C05A45", desc: "Burnt earth red, deep and saturated, ages with grace." },
-    { code: "GC 31", name: "Olive Moss", hex: "#5B7059", desc: "Quiet green, drawn from lichen and oak-shaded stone." },
-    { code: "GC 38", name: "Pine Shadow", hex: "#3A4538", desc: "Deep forest green-black, dramatic and architectural." },
     { code: "GC 45", name: "Slate Ash", hex: "#5C5751", desc: "Cool mineral grey with traces of mica." },
     { code: "GC 52", name: "Charcoal Stone", hex: "#1F1F1D", desc: "Near-black, the deepest mineral pigment our chemistry allows." },
 ];
