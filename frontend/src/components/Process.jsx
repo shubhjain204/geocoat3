@@ -48,8 +48,8 @@ export const Process = () => {
                         <span>The Process</span>
                     </div>
                     <h2 className="col-span-12 lg:col-span-9 font-heading text-4xl md:text-6xl lg:text-7xl font-extralight tracking-tight leading-[0.95] text-[#1A1A1A] text-balance">
-                        Five steps from{" "}
-                        <span className="italic text-[#3A4538]">mineral</span> to monument.
+                        Five simple steps from{" "}
+                        <span className="italic text-[#3A4538]">raw mineral</span> to finished surface.
                     </h2>
                 </motion.div>
 
