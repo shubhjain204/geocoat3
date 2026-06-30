@@ -60,8 +60,7 @@ export const HomeHero = () => {
                         className="mt-10 max-w-xl text-base md:text-lg text-[#5B7059] leading-relaxed"
                     >
                         GeoCoat builds two industrial-grade mineral silicate systems —
-                        one for architecture, one for steel. Both engineered to outlast
-                        the surfaces they protect.
+                        one for architectural surface, and one for iron surfaces.
                     </motion.p>
                 </div>
 
