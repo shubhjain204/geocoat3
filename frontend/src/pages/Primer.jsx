@@ -163,7 +163,7 @@ function PrimerHero() {
                     className="flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-[#5B7059] pointer-events-auto"
                 >
                     <span className="w-8 h-px bg-[#5B7059]" />
-                    <span>Marine · Offshore · Splash zone</span>
+                    <span>Atmospheric · Industrial · Offshore</span>
                 </motion.div>
 
                 <div className="max-w-5xl pointer-events-auto">
@@ -173,9 +173,9 @@ function PrimerHero() {
                         transition={{ duration: 1.2, delay: 0.2, ease: [0.86, 0, 0.07, 1] }}
                         className="font-heading font-extralight tracking-tighter leading-[0.95] text-[#1A1A1A] text-5xl sm:text-7xl md:text-8xl lg:text-[8rem] text-balance"
                     >
-                        Steel that
+                        Coating that
                         <br />
-                        <span className="italic font-light text-[#3A4538]">outlasts</span> the sea
+                        <span className="italic font-light text-[#3A4538]">outlasts</span> the substrate
                         <span className="text-[#C05A45]">.</span>
                     </motion.h1>
 
@@ -186,7 +186,7 @@ function PrimerHero() {
                         className="mt-10 max-w-xl text-base md:text-lg text-[#5B7059] leading-relaxed"
                     >
                         A three-layer mineral silicate anti-corrosion system engineered for
-                        marine, offshore, and splash-zone steel. Sacrificial zinc, lamellar
+                        atmospheric, industrial, and offshore steel. Sacrificial zinc, lamellar
                         barrier, polyurethane topcoat — total protection.
                     </motion.p>
 
