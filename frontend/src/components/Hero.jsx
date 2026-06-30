@@ -107,10 +107,10 @@ export const Hero = () => {
                     </div>
                     <div className="flex flex-wrap gap-x-12 gap-y-4 font-heading font-light">
                         {[
-                            { k: "25+ yr", v: "Service life" },
+                            { k: "20+ yr", v: "Service life" },
                             { k: "0 VOC", v: "Toxic emissions" },
                             { k: "A1", v: "Fire rating" },
-                            { k: "µ < 5", v: "Vapour permeable" },
+                            { k: "µ < 500", v: "Vapour permeable" },
                         ].map((stat) => (
                             <div key={stat.k} data-testid={`hero-stat-${stat.k}`}>
                                 <div className="text-2xl text-[#1A1A1A]">{stat.k}</div>
