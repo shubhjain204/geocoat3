@@ -672,7 +672,6 @@ export default function Primer() {
                 <PerformanceSection />
                 <PrimerApplications />
                 <PrimerProcess />
-                <PrimerCTA />
                 <Contact />
                 <Footer />
             </main>
