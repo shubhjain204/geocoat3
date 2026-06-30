@@ -5,20 +5,11 @@ import { Send, Loader2 } from "lucide-react";
 
 const CONTACT_EMAIL = "studio@geocoat.example";
 
-const projectTypes = [
-    "Heritage / Restoration",
-    "Residential",
-    "Commercial",
-    "Institutional",
-    "Other",
-];
-
 export const Contact = () => {
     const [form, setForm] = useState({
         name: "",
         email: "",
         phone: "",
-        project_type: projectTypes[0],
         message: "",
     });
     const [loading, setLoading] = useState(false);
@@ -40,7 +31,6 @@ export const Contact = () => {
                 `Name: ${form.name}`,
                 `Email: ${form.email}`,
                 form.phone ? `Phone: ${form.phone}` : null,
-                `Project type: ${form.project_type}`,
                 "",
                 form.message,
             ]
@@ -48,7 +38,7 @@ export const Contact = () => {
                 .join("\n");
 
             const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-                `GeoCoat enquiry - ${form.project_type}`
+                `GeoCoat enquiry from ${form.name}`
             )}&body=${encodeURIComponent(body)}`;
 
             window.location.href = mailto;
@@ -57,7 +47,6 @@ export const Contact = () => {
                 name: "",
                 email: "",
                 phone: "",
-                project_type: projectTypes[0],
                 message: "",
             });
         } catch (err) {
@@ -141,8 +130,8 @@ export const Contact = () => {
                         className="col-span-12 lg:col-span-7 bg-[#F5F5F0] text-[#1A1A1A] p-8 md:p-12 rounded-sm"
                         data-testid="contact-form"
                     >
-                        <div className="grid grid-cols-2 gap-5">
-                            <div className="col-span-2 md:col-span-1">
+                        <div className="grid grid-cols-1 gap-5">
+                            <div className="col-span-1">
                                 <label className="text-xs uppercase tracking-[0.25em] text-[#5B7059] mb-2 block">
                                     Name
                                 </label>
@@ -156,7 +145,7 @@ export const Contact = () => {
                                     data-testid="contact-input-name"
                                 />
                             </div>
-                            <div className="col-span-2 md:col-span-1">
+                            <div className="col-span-1">
                                 <label className="text-xs uppercase tracking-[0.25em] text-[#5B7059] mb-2 block">
                                     Email
                                 </label>
@@ -170,7 +159,7 @@ export const Contact = () => {
                                     data-testid="contact-input-email"
                                 />
                             </div>
-                            <div className="col-span-2 md:col-span-1">
+                            <div className="col-span-1">
                                 <label className="text-xs uppercase tracking-[0.25em] text-[#5B7059] mb-2 block">
                                     Phone (optional)
                                 </label>
@@ -184,25 +173,7 @@ export const Contact = () => {
                                     data-testid="contact-input-phone"
                                 />
                             </div>
-                            <div className="col-span-2 md:col-span-1">
-                                <label className="text-xs uppercase tracking-[0.25em] text-[#5B7059] mb-2 block">
-                                    Project type
-                                </label>
-                                <select
-                                    name="project_type"
-                                    value={form.project_type}
-                                    onChange={handleChange}
-                                    className={inputBase}
-                                    data-testid="contact-input-project-type"
-                                >
-                                    {projectTypes.map((p) => (
-                                        <option key={p} value={p}>
-                                            {p}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className="col-span-2">
+                            <div className="col-span-1">
                                 <label className="text-xs uppercase tracking-[0.25em] text-[#5B7059] mb-2 block">
                                     Tell us about the project
                                 </label>

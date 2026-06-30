@@ -20,6 +20,18 @@ const items = [
         name: "Dr. Helena Costa",
         role: "Conservation Lead, Patrimoine",
     },
+    {
+        quote:
+            "The primer and paint system gave us a consistent mineral finish across old render, repaired patches, and new masonry. It saved days on site and looked beautifully calm.",
+        name: "Kabir Sethi",
+        role: "Site Manager, Arka Buildworks",
+    },
+    {
+        quote:
+            "Clients notice the depth of the finish immediately. It has that soft, matte surface we wanted, but with the durability our coastal projects need.",
+        name: "Mira Thomas",
+        role: "Interior Designer, Northline Studio",
+    },
 ];
 
 export const Testimonials = () => {
@@ -53,8 +65,8 @@ export const Testimonials = () => {
                             transition={{ duration: 0.8, delay: i * 0.1 }}
                             className={`col-span-12 ${
                                 i === 0
-                                    ? "md:col-span-12 lg:col-span-7"
-                                    : "md:col-span-6 lg:col-span-5"
+                                    ? "md:col-span-12 lg:col-span-8"
+                                    : "md:col-span-6 lg:col-span-4"
                             } bg-[#F5F5F0] border border-[#D1CEC5] p-8 md:p-12 hover:-translate-y-1 transition-all duration-500`}
                             data-testid={`testimonial-${i}`}
                         >
