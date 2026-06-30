@@ -461,26 +461,27 @@ function PerformanceSection() {
 /* ---------- Applications ---------- */
 const applications = [
     {
-        tag: "01 / Marine",
+        tag: "01 / ATMOSPHERIC",
         title: "Hulls, decks, ballast tanks",
         body: "Long-term protection for ocean-going steel exposed to constant immersion, salt and abrasion.",
-        img: "https://images.unsplash.com/photo-1604506522146-316c8bedd874?fm=jpg&q=80&w=1400&auto=format&fit=crop",
+        img: "https://images.pexels.com/photos/32371099/pexels-photo-32371099.jpeg?fm=jpg&q=80&w=1400&auto=format&fit=crop",
         span: "col-span-12 md:col-span-7",
         aspect: "aspect-[16/10]",
     },
     {
-        tag: "02 / Offshore",
-        title: "Platforms & risers",
-        body: "A coating system specified for splash-zone and atmospheric service on offshore structures.",
-        img: "https://images.unsplash.com/photo-1585713181935-d5f622cc2415?fm=jpg&q=80&w=1200&auto=format&fit=crop",
-        span: "col-span-12 md:col-span-5",
-        aspect: "aspect-[4/5]",
-    },
-    {
-        tag: "03 / Industrial",
+        tag: "02 / Industrial",
         title: "Bridges & infrastructure",
         body: "High-performance corrosion protection for steel bridges, pipelines, and heavy infrastructure.",
-        img: "https://images.pexels.com/photos/37582309/pexels-photo-37582309.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200",
+        img: "https://images.pexels.com/photos/10490664/pexels-photo-10490664.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1200",
+        span: "col-span-12 md:col-span-5",
+        aspect: "aspect-[4/5]",
+        
+    },
+    {
+        tag: "03 / Offshore",
+        title: "Platforms & risers",
+        body: "A coating system specified for splash-zone and atmospheric service on offshore structures.",
+        img: "https://images.pexels.com/photos/16830015/pexels-photo-16830015.jpeg?fm=jpg&q=80&w=1200&auto=format&fit=crop",
         span: "col-span-12 md:col-span-5",
         aspect: "aspect-[4/5]",
     },
@@ -562,7 +563,7 @@ const steps = [
     { n: "01", title: "Site survey", body: "Substrate inspection — degree of corrosion, salt contamination, profile depth, project environment." },
     { n: "02", title: "Surface preparation", body: "Abrasive blast to Sa 2½ (ISO 8501-1) with 50-75 µm profile, immediately before primer application." },
     { n: "03", title: "Zinc-rich primer", body: "Spray-applied at 75 µm DFT. Provides sacrificial cathodic protection to base steel." },
-    { n: "04", title: "MIO intermediate", body: "Lamellar barrier coat at 125 µm DFT. Blocks moisture, UV, and chemical attack." },
+    { n: "04", title: "Intermediate Coat", body: "Lamellar barrier coat at 125 µm DFT. Blocks moisture, UV, and chemical attack." },
     { n: "05", title: "Polyurethane topcoat", body: "Final 75 µm DFT for color, gloss, and chemical / abrasion resistance. Cure 7 days." },
 ];
 
@@ -601,11 +602,6 @@ function PrimerProcess() {
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <p className="text-sm text-[#5B7059] leading-relaxed max-w-md">
-                                Every primer application is supervised by a GeoCoat-certified
-                                inspector. Substrate, environment, and cure are continuously
-                                monitored against the spec.
-                            </p>
                         </div>
                     </div>
 
