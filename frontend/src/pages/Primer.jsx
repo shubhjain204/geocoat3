@@ -419,40 +419,6 @@ function PerformanceSection() {
                         );
                     })}
                 </div>
-
-                {/* Warranty block */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
-                    data-testid="primer-warranty-block"
-                >
-                    {[
-                        { k: "15-YEAR", v: "Primer warranty", icon: Shield },
-                        { k: "25+", v: "Years formulating", icon: CheckCircle2 },
-                        { k: "100%", v: "VOC-free mineral system", icon: Droplets },
-                    ].map((b) => {
-                        const Icon = b.icon;
-                        return (
-                            <div
-                                key={b.k}
-                                className="bg-[#1A1A1A] text-[#F5F5F0] p-8 md:p-10 flex items-center justify-between gap-4"
-                            >
-                                <div>
-                                    <div className="font-heading text-4xl md:text-5xl font-extralight">
-                                        {b.k}
-                                    </div>
-                                    <div className="text-xs uppercase tracking-[0.25em] text-[#DDA74F] mt-2">
-                                        {b.v}
-                                    </div>
-                                </div>
-                                <Icon size={36} strokeWidth={1} className="text-[#DDA74F] opacity-70" />
-                            </div>
-                        );
-                    })}
-                </motion.div>
             </div>
         </section>
     );
