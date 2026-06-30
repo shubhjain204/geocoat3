@@ -2,8 +2,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const palette = [
+    { code: "GC 00", name: "White", hex: "#FFFFFF", desc: "A clean mineral white for bright, quiet architectural surfaces." },
     { code: "GC 01", name: "Limestone", hex: "#EAE6DA", desc: "Soft warm white with the calm of weathered limestone." },
     { code: "GC 07", name: "Bone Sand", hex: "#D9CDB5", desc: "An organic neutral, equally at home in heritage or modern interiors." },
+    { code: "GC 08", name: "Dark Bone Sand", hex: "#B9AA8E", desc: "A deeper bone-sand neutral with more warmth and architectural weight." },
     { code: "GC 14", name: "Ochre Earth", hex: "#C89F5D", desc: "Iron-oxide ochre — the original pigment of human history." },
     { code: "GC 22", name: "Terracotta", hex: "#C05A45", desc: "Burnt earth red, deep and saturated, ages with grace." },
     { code: "GC 45", name: "Slate Ash", hex: "#5C5751", desc: "Cool mineral grey with traces of mica." },

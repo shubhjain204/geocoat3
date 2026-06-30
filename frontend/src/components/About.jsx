@@ -78,9 +78,9 @@ export const About = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 1.2 }}
-                    className="mt-24 md:mt-32 grid grid-cols-12 gap-4 md:gap-6"
+                    className="mt-24 md:mt-32 grid grid-cols-2 md:grid-cols-12 auto-rows-[150px] md:auto-rows-[190px] lg:auto-rows-[220px] gap-4 md:gap-6"
                 >
-                    <div className="col-span-12 md:col-span-8 aspect-[16/10] overflow-hidden">
+                    <div className="col-span-2 md:col-span-7 md:row-span-2 overflow-hidden">
                         <img
                             src="https://images.unsplash.com/photo-1761476267514-ffec14e7af84?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwzfHxzdG9uZSUyMGZhY2FkZSUyMGJ1aWxkaW5nfGVufDB8fHx8MTc4MjExMTgwOHww&ixlib=rb-4.1.0&q=85"
                             alt="Stone facade architecture"
@@ -88,25 +88,37 @@ export const About = () => {
                             data-testid="about-image-primary"
                         />
                     </div>
-                    <div className="col-span-12 md:col-span-4 flex flex-col gap-4 md:gap-6">
-                        <div className="aspect-[4/3] overflow-hidden">
-                            <img
-                                src="https://images.unsplash.com/photo-1708894462826-ba3fa93b41b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwxfHxtaW5lcmFsJTIwcGFpbnQlMjB0ZXh0dXJlfGVufDB8fHx8MTc4MjExMTgwOHww&ixlib=rb-4.1.0&q=85"
-                                alt="Mineral paint texture"
-                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1.4s]"
-                                data-testid="about-image-secondary"
-                            />
-                        </div>
-                        <div className="bg-[#3A4538] text-[#F5F5F0] p-6 flex-1 flex flex-col justify-between">
-                            <div className="text-xs uppercase tracking-[0.3em] text-[#DDA74F]">
-                                Founded
-                            </div>
-                            <div className="font-heading text-5xl md:text-6xl font-extralight">2011</div>
-                            <div className="text-sm text-[#EAE6DA] leading-relaxed mt-4">
-                                Trusted by architects, conservators, and developers across heritage,
-                                residential, and commercial projects.
-                            </div>
-                        </div>
+                    <div className="col-span-1 md:col-span-3 overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1708894462826-ba3fa93b41b7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwxfHxtaW5lcmFsJTIwcGFpbnQlMjB0ZXh0dXJlfGVufDB8fHx8MTc4MjExMTgwOHww&ixlib=rb-4.1.0&q=85"
+                            alt="Mineral paint texture"
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1.4s]"
+                            data-testid="about-image-secondary"
+                        />
+                    </div>
+                    <div className="col-span-1 md:col-span-2 overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85"
+                            alt="Painter applying a mineral coating to a wall"
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1.4s]"
+                            data-testid="about-image-tertiary"
+                        />
+                    </div>
+                    <div className="col-span-1 md:col-span-2 overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1494526585095-c41746248156?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85"
+                            alt="Warm residential exterior with a coated facade"
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1.4s]"
+                            data-testid="about-image-quaternary"
+                        />
+                    </div>
+                    <div className="col-span-1 md:col-span-3 overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85"
+                            alt="Modern coated building exterior"
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1.4s]"
+                            data-testid="about-image-quinary"
+                        />
                     </div>
                 </motion.div>
             </div>
