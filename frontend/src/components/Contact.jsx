@@ -27,22 +27,18 @@ export const Contact = () => {
         }
         setLoading(true);
         try {
-            const body = [
-                `Name: ${form.name}`,
-                `Email: ${form.email}`,
-                form.phone ? `Phone: ${form.phone}` : null,
-                "",
-                form.message,
-            ]
-                .filter(Boolean)
-                .join("\n");
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form),
+            });
 
-            const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-                `GeoCoat enquiry from ${form.name}`
-            )}&body=${encodeURIComponent(body)}`;
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) {
+                throw new Error(result.message || "Could not send your enquiry.");
+            }
 
-            window.location.href = mailto;
-            toast.success("Your email app should open with the project details ready to send.");
+            toast.success("Thank you. Your enquiry has been sent to the GeoCoat team.");
             setForm({
                 name: "",
                 email: "",
@@ -51,7 +47,7 @@ export const Contact = () => {
             });
         } catch (err) {
             toast.error(
-                "Could not open your email app. Please email us directly."
+                err.message || `Could not send your enquiry. Please email us at ${CONTACT_EMAIL}.`
             );
         } finally {
             setLoading(false);
