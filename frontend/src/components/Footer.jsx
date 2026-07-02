@@ -57,7 +57,7 @@ export const Footer = () => {
                             Get in touch
                         </div>
                         <ul className="space-y-3 text-sm">
-                            <li>studio@geocoat.example</li>
+                            <li>admin.geocoat@gmail.com</li>
                             <li>+91 80 GEO COAT</li>
                             <li className="text-[#EAE6DA]/70">Bangalore · Mumbai · Lisbon</li>
                         </ul>

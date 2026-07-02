@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Send, Loader2 } from "lucide-react";
 
-const CONTACT_EMAIL = "studio@geocoat.example";
+const CONTACT_EMAIL = "admin.geocoat@gmail.com";
 
 export const Contact = () => {
     const [form, setForm] = useState({
