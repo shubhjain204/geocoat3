@@ -30,17 +30,21 @@ export const Footer = () => {
                     {/* Links */}
                     <div className="col-span-6 md:col-span-3">
                         <div className="text-xs uppercase tracking-[0.3em] text-[#DDA74F] mb-4">
-                            Explore
+                            Pages
                         </div>
                         <ul className="space-y-3 text-sm">
-                            {["About", "Why Mineral", "Palette", "Applications", "Process"].map((l) => (
-                                <li key={l}>
+                            {[
+                                { label: "Home", href: "/" },
+                                { label: "Mineral Silicate Paint", href: "/paint" },
+                                { label: "Mineral Silicate Primer", href: "/primer" },
+                            ].map((l) => (
+                                <li key={l.label}>
                                     <a
-                                        href={`#${l.toLowerCase().replace(/\s/g, "-").replace("why-mineral", "why")}`}
+                                        href={l.href}
                                         className="geo-link hover:text-[#F5F5F0] transition-colors"
-                                        data-testid={`footer-link-${l.toLowerCase().replace(/\s/g, "-")}`}
+                                        data-testid={`footer-link-${l.label.toLowerCase().replace(/\s/g, "-")}`}
                                     >
-                                        {l}
+                                        {l.label}
                                     </a>
                                 </li>
                             ))}
@@ -50,7 +54,7 @@ export const Footer = () => {
                     {/* Contact */}
                     <div className="col-span-6 md:col-span-4">
                         <div className="text-xs uppercase tracking-[0.3em] text-[#DDA74F] mb-4">
-                            Reach
+                            Get in touch
                         </div>
                         <ul className="space-y-3 text-sm">
                             <li>studio@geocoat.example</li>
@@ -62,12 +66,7 @@ export const Footer = () => {
 
                 {/* Bottom bar */}
                 <div className="pt-8 border-t border-[#3A4538] flex flex-col md:flex-row justify-between gap-4 text-xs text-[#EAE6DA]/60">
-                    <div>© {new Date().getFullYear()} GeoCoat Mineral Paints. All rights reserved.</div>
-                    <div className="flex gap-6">
-                        <a href="#" className="geo-link hover:text-[#F5F5F0]" data-testid="footer-link-privacy">Privacy</a>
-                        <a href="#" className="geo-link hover:text-[#F5F5F0]" data-testid="footer-link-terms">Terms</a>
-                        <a href="#" className="geo-link hover:text-[#F5F5F0]" data-testid="footer-link-spec">Tech Specs</a>
-                    </div>
+                    <div>© {new Date().getFullYear()} GeoCoat Sciences Private Limited. All rights reserved.</div>
                 </div>
             </div>
         </footer>
